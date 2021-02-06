@@ -1,0 +1,165 @@
+$mainBg               : #2c3940 !default;
+$widgetBgColor        : #1b262d !default;
+$widgetTextColor      : #c4c7c9 !default;
+$widgetMaxWidth       : 650px !default;
+$widgetMinWidth       : 650px !default;
+$obContainerMinHeight : 100vh !default;
+$obContainerMinWidth  : 100vw !default;
+
+$appBaseFontFamily    : Arial, Helvetica, sans-serif !default;
+$appBaseFontSize      : 16px !default;
+
+$fontSize_14          : $appBaseFontSize * 0.875 !default;
+$fontSize_12          : $appBaseFontSize * 0.75 !default;
+
+$colorWhite           : #FFFFFF !default;
+$colorGray            : #555555 !default;
+$colorGray_light      : #7e8488 !default;
+$colorGraphGreen      : #1a4135 !default;
+$colorGraphRed        : #462f36 !default;
+
+$iconSvgFontSize      : 18px !default;
+
+* {  
+  box-sizing:border-box;
+}
+
+body {
+  background-color: $mainBg;
+  color: $widgetTextColor;
+  font-family: $appBaseFontFamily;
+  font-size: $appBaseFontSize;
+}
+
+.flexAllCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orderBook {
+  min-width: $widgetMinWidth;
+  max-width: $widgetMaxWidth;
+  background-color: $widgetBgColor;
+  overflow: hidden;
+  
+  &Container {
+    @extend .flexAllCenter;
+    
+    min-height: $obContainerMinHeight;
+    min-width: $obContainerMinWidth;    
+  }
+
+  &Loader {
+    @extend .flexAllCenter;
+
+    padding: 10px;
+    min-height: 100px;
+  }
+
+  &Header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid $colorGray;
+    height:30px;
+    padding:5px 0;
+    margin-bottom:10px;
+    font-size: $appBaseFontSize;
+
+    h4 {
+      padding-left: 10px;
+      margin: 0;
+      font-size: $appBaseFontSize;
+      color: $colorWhite;
+
+      span {
+        font-size: $fontSize_12;
+        color: $colorGray_light;
+        font-weight: normal;
+      }
+    }
+  }
+
+  &Zoom {
+    display:flex;    
+  }
+
+  &Icon {
+    display: flex;
+    flex-grow: 0;
+    padding: 5px;
+    cursor: pointer;
+
+    svg {
+      font-size: $iconSvgFontSize;
+    }
+  }
+
+  &Table {
+    flex-basis: 50%;
+    user-select: none;
+    
+    thead,
+    .tableHead {
+      td,
+      .tableCell {
+        text-transform: uppercase;
+        font-size: $fontSize_12;
+        color: #aaa !important;
+      }
+    }
+
+    tr,
+    .tableRow {
+      display: flex;
+      background-repeat: none;
+      background-size: 100% 100%;
+      position: relative;
+      
+      .graphBar {
+        position: absolute;
+        top: 0;
+        left: auto;
+        background-color: $colorGraphRed;
+        height: 100%;
+        z-index: 0;
+
+        &.inverted {
+          background-color: $colorGraphGreen;
+          transform: rotate(180deg);
+          right: 0;
+        }
+      }
+    }
+
+    td,
+    .tableCell {
+      color: #F0F0f0;
+      padding: 1px 10px;
+      text-align: right;
+      flex: 1;
+      font-size: $fontSize_12;
+      z-index: 1;
+
+      &.count {
+        text-align: center;
+      }
+    }
+  }
+
+}
+
+.flexRowContainer {
+  display: flex;
+}
+
+.flexColumnContainer {
+  background-color: #1b262d;
+  flex-grow:0;
+  display: flex;
+  flex-flow: column;
+  width:645px;
+  margin:5px;
+  padding:5px;
+}
